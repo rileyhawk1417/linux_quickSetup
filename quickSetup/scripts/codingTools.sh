@@ -9,6 +9,8 @@
 # This function installs VSCode via apt in terminal
 
 function vsCode {
+    echo "######Installing VSCODE#####"   
+
     sudo apt install software-properties-common apt-transport-https wget
 
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -22,6 +24,8 @@ function vsCode {
 
 function nodeInstall {
 
+    echo "######Installing Node#####"   
+
     curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install -y nodejs
 
@@ -30,6 +34,7 @@ function nodeInstall {
 #This function installs postgresql
 
 function postgresql {
+    echo "######Installing PostgreSql#####"   
 
 # Create the file repository configuration:
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
@@ -44,6 +49,25 @@ sudo apt-get update
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
 sudo apt-get -y install postgresql
 
+}
+
+function p10kTheme{
+
+    echo "####Installing P10K, fonts will be installed manually####"
+
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Copy Fonts to library
+    cp -r extra/fonts -t ~/Desktop 
+    cp -b -f extra/profiles/.bashrc -t ~/
+    cp -b -f extra/profiles/.tmux.conf -t ~/
+    cp -b -f extra/profiles/.vimrc -t ~/
+    cp -b -f extra/profiles/.zshrc -t ~/
+    
+    echo "####Sourcing Profiles####"
+
+    source ~/.bashrc
+    source ~/.vimrc
+    source ~/.zshrc
 }
 
 function sqlite {
@@ -89,6 +113,7 @@ function zshConfig {
 function zshSetup {
     zsh
     zshConfig
+    p10kTheme
 }
 
 #Virtual Machine
@@ -108,18 +133,24 @@ function kvmSetup {
 
 # Chrome
 function chromeInstall {
+
+    echo "#####Downloading Chrome#####"
     cd ~/Downloads
 
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         
+    echo "#####Installing Chrome#####"   
     sudo dpkg -i google-chrome-stable_current_amd64.deb
 }
 
 #FDM
 function fdmInstall {
+    echo "######Installing FDM#####"   
+
     cd ~/Downloads
 
     wget https://deb.fdmpkg.org/freedownloadmanager.deb
+    echo "#####Installing FDM#####"   
 
     sudo dpkg -i freedownloadmanager.deb
 }
