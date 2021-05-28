@@ -52,10 +52,11 @@ sudo apt-get -y install postgresql
 }
 
 function p10kTheme{
+    sudo apt install tmux
 
     echo "####Installing P10K, fonts will be installed manually####"
 
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     # Copy Fonts to library
     cp -r extra/fonts -t ~/Desktop 
     cp -b -f extra/profiles/.bashrc -t ~/
@@ -68,6 +69,7 @@ function p10kTheme{
     source ~/.bashrc
     source ~/.vimrc
     source ~/.zshrc
+    source ~/.tmux.conf
 }
 
 function sqlite {
@@ -172,7 +174,7 @@ function codingToolsOption {
 }
 
 function codingSuite {
-    codingToolsOprtion
+    codingToolsOption
     generalTools
 }
 
