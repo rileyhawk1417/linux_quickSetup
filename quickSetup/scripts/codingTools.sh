@@ -1,28 +1,68 @@
 #!/bin/bash
 
-# This script installs all the necessary 
-# tools for a Web Developer and Android Developer
 # Not all tools are prepared here 
 # So some need to be installed individually
+nextLine=\
+
+function codingToolsOption() {
+    uploadTools
+    vsCode
+    nodeInstall
+    dataBase
+    jre
+    zsh
+    CopyProfile
+    kvmSetup
+}
+
+function codingToolsReadme() {
+    clear
+    
+    echo "The following will be installed ⚙️ : "
+    echo $nextLine
+    echo "Visual Studio Code - Powerful text editor and IDE," 
+    echo "Node - Powerful library for JavaScript and other node related projects,"
+    echo "Databases - These include Postgresql and Sqlite3"
+    echo "JRE -  This is the Java Runtime Environment"
+    echo "ZSH - Powerful terminal emulator with alot of tricks"
+    echo "Upload & Download Tools - These include git, wget, curl and other essentials"
+    echo "KVM - This is a library for building virtual machines"
+    echo "Preset profiles that would make setting up the environment easier"
+    echo $nextLine
+    echo "Install the tools"
+    echo "Y/N"
+}
 
 
-# This function installs VSCode via apt in terminal
+function databaseOnlyReadme() {
+    clear
 
-function vsCode {
+    echo "Database Tools will only be installed ⚙️ : "
+    echo $nextLine
+    echo "Postgresql"
+    echo "Sqlite3"
+    echo $nextLine
+    echo "Install the tools?"
+    echo "Y/N"
+}
+
+# VSCode
+
+function vsCode() {
     echo "######Installing VSCODE#####"   
 
-    sudo apt install software-properties-common apt-transport-https wget
+    sudo apt-get install software-properties-common apt-transport-https wget
 
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
-    sudo apt install code
+    sudo apt-get install code
 }
 
-# This function installs node
+# Node 14.x
 
-function nodeInstall {
+function nodeInstall() {
 
     echo "######Installing Node#####"   
 
@@ -31,9 +71,9 @@ function nodeInstall {
 
 }
 
-#This function installs postgresql
+#Postgresql
 
-function postgresql {
+function postgresql() {
     echo "######Installing PostgreSql#####"   
 
 # Create the file repository configuration:
@@ -51,34 +91,15 @@ sudo apt-get -y install postgresql
 
 }
 
-function p10kTheme{
-    sudo apt install tmux
 
-    echo "####Installing P10K, fonts will be installed manually####"
-
-    git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    # Copy Fonts to library
-    cp -r extra/fonts -t ~/Desktop 
-    cp -b -f extra/profiles/.bashrc -t ~/
-    cp -b -f extra/profiles/.tmux.conf -t ~/
-    cp -b -f extra/profiles/.vimrc -t ~/
-    cp -b -f extra/profiles/.zshrc -t ~/
-    
-    echo "####Sourcing Profiles####"
-
-    source ~/.bashrc
-    source ~/.vimrc
-    source ~/.zshrc
-    source ~/.tmux.conf
-}
-
-function sqlite {
+#SQLite3
+function sqlite() {
 
     sudo apt install sqlite3
 
 }
 
-function dataBase {
+function dataBase() {
 
     postgresql
     sqlite
@@ -89,138 +110,115 @@ function dataBase {
 # The JDK needs to be downloaded seperately
 # https://www.openlogic.com/openjdk-downloads
 
-function jre {
+#Java Runtime Environment
+
+# function jdk_install(){
+#     clear
+
+#     cd ~/Downloads
+#     wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz
+
+#     tar -xvf openjdk-11+28_linux-x64_bin.tar.gz’
+
+#     cd openjdk-11+28_linux-x64_bin
+
+
+
+# }
+
+function jre() {
+
+    echo "Installing JRE Headless"
 
     sudo apt install default-jre
     sudo apt install openjdk-11-jre-headless
 
 }
 
-# Install git, wget, curl for easy setup
+# Zsh terminal
 
-function uploadTools {
+function zsh() {
+    clear
+
+    echo "Installing ZSH & TMUX"
+    sudo apt update
+    sudo apt install zsh
+    #sudo chsh -s $(which zsh)
+    sudo apt-get install tmux
+    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" 
+    #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    #sudo chsh -s $(which zsh)
+}
+
+#Profiles setup
+
+function profileSchema(){
+
+    echo "Copying fonts to Desktop"
+    cp -r scripts/extra/fonts -t ~/Desktop 
+    echo "Fonts have been copied"
+    echo $nextLine
+    echo "Copying profiles to home directory"
+    cp scripts/extra/profiles/.bashrc -t ~/
+    cp scripts/extra/profiles/.tmux.conf -t ~/
+    cp scripts/extra/profiles/.vimrc -t ~/
+    cp scripts/extra/profiles/.zshrc -t ~/
+    echo $nextLine
+    echo "#####Profiles copied now sourcing#####" 
+    source ~/.bashrc ~/.vimrc ~/.zshrc ~/.tmux.conf ~/.profile
+    echo $nextLine
+    echo "Profiles all copied and setup"
+
+}
+
+#Copy Preset Profiles and setup environment
+
+function CopyProfile(){
+    clear
+
+    echo "Do you want to copy preset profiles?"
+
+    read -r -p "Y/N: " option
+
+    case $option in 
+	[Yy]* )
+            profileSchema
+             ;;
+	 [Nn]* )
+            echo "Skipping profiles and installing KVM"
+            kvmSetup 
+         ;;
+	 *)
+	     echo "Command not recognized"
+         exit 1
+         ;;
+   esac
+
+}
+
+#Install git, wget, curl for easy setup
+
+function uploadTools() {
     sudo apt-get install git wget curl
 }
 
-# Zsh terminal
-function zsh {
-    sudo apt update
-    sudo apt install zsh
-}
-
-function zshConfig {
-    sudo chsh -s $(which zsh)
-}
-
-function zshSetup {
-    zsh
-    zshConfig
-    p10kTheme
-}
-
 #Virtual Machine
-function kvmLib {
+function kvmLib() {
     sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager
 }
 
-function kvmConfig {
+function kvmConfig() {
+    echo "Add KVM to users"
+
     sudo adduser $USER libvirt
     sudo adduser $USER kvm
 }
 
-function kvmSetup {
+function kvmSetup() {
+    clear
+
+    echo "Install virtual machine libraries"
     kvmLib
     kvmConfig
-}
-
-# Chrome
-function chromeInstall {
-
-    echo "#####Downloading Chrome#####"
-    cd ~/Downloads
-
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        
-    echo "#####Installing Chrome#####"   
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-}
-
-#FDM
-function fdmInstall {
-    echo "######Installing FDM#####"   
-
-    cd ~/Downloads
-
-    wget https://deb.fdmpkg.org/freedownloadmanager.deb
-    echo "#####Installing FDM#####"   
-
-    sudo dpkg -i freedownloadmanager.deb
-}
-
-function generalTools {
-    fdmInstall
-    chromeInstall
-    sudo apt-get install vlc ncdu htop
-}
-
-function codingToolsOption {
-    vsCode
-    nodeInstall
-    dataBase
-    jre
-    zshSetup
-    uploadTools
-    kvmSetup
-}
-
-function codingSuite {
-    codingToolsOption
-    generalTools
-}
-
-function generalToolsReadme {
-    clear
-    
-    echo "The following will be installed ⚙️ : "
-    echo ""
-    echo "Google-Chrome - Web Browser," 
-    echo "FDM - Download Manager alternative to IDM,"
-    echo "VLC - Powerful Open Source Video Player"
-    echo ""
-}
-
-function codingToolsReadme {
-    clear
-    
-    echo "The following will be installed ⚙️ : "
-    echo ""
-    echo "Visual Studio Code - Powerful text editor," 
-    echo "Node - Powerful library for JavaScript and other projects,"
-    echo "Databases - These include Postgresql and Sqlite3"
-    echo "JRE -  This is the Java Runtime Environment"
-    echo "ZSH - Powerful terminal emulator with alot of tricks"
-    echo "Upload Tools - These include git, wget, curl and other essentials"
-    echo "KVM - This is a library for building virtual machines"
-    echo ""
-}
-
-function codingSuiteReadme {
-    clear 
-
-    echo "The following is a summary of what will be installed ⚙️ : "
-    echo ""
-    echo "Coding Tools - Will install all the necessary tools" 
-    echo "needed for Web Development and Android Development"
-    echo "General Tools - Will install basic tools for a typical user"
-    echo ""
-}
-
-function databaseOnlyReadme {
-    clear
-
-    echo "Database Tools will only be installed ⚙️ : "
-    echo ""
-    echo "Postgreql"
-    echo "Sqlite3"
-    echo ""
 }

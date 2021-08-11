@@ -5,18 +5,14 @@
 
 # Installing GIMP
 
-function gimpInstall {
+function gimpInstall() {
 
     sudo add-apt-repository ppa:otto-kesselgulasch/gimp
 
     sudo apt install gimp
 }
 
-# When uninstalling gimp use command below
-# sudo apt-get autoremove gimp gimp-plugin-registry
-# When installing LightWorks go to the website
-
-function inkscapeInstall {
+function inkscapeInstall() {
 
     sudo add-apt-repository ppa:inskcape.dev/stable
 
@@ -26,14 +22,14 @@ function inkscapeInstall {
 # sudo apt-get install libegl1-mesa
 # Then cd into the directory and run install.sh
 
-function obsInstall {
+function obsInstall() {
 
     sudo add-apt-repository ppa:obsproject/obs-studio
 
     sudo apt-get install obs-studio
 }
 
-function graphicsSuite {
+function graphicsSuite() {
     clear
     
     obsInstall
@@ -45,7 +41,7 @@ function graphicsSuite {
     exit 1
 }
 
-function graphicsReadme {
+function graphicsReadme() {
     clear
     
     echo "The following will be installed"
@@ -53,4 +49,7 @@ function graphicsReadme {
     echo "GIMP - Image Manipulator," 
     echo "Inkscape - Image Manipulator,"
     echo "OBS - Screencast and Video Editor"
+    echo $nextLine
+    echo "Do you want to install ?"
+    echo "Y/N"
 }
