@@ -1,8 +1,9 @@
 #!/bin/bash
 
-source scripts/codingTools.sh
-source scripts/graphicsSuite.sh
-source scripts/multiInstaller.sh
+source "scripts/codingTools.sh" 
+source "scripts/graphicsSuite.sh" 
+source "scripts/multiInstaller.sh"
+source "scripts/generalTools.sh"
 
 echo "#############################################"
 echo "# Welcome to quickstart Script installer 😉 #" 
@@ -15,10 +16,10 @@ read -r -p "Y/N: " answer
 case $answer in 
     [Yy]* )
         echo "Beginning Installation"
-	menuDisplay
+	    menuDisplay
         ;;
     [Nn]* )
-        echo "Installation Cancelled ❌"
+        cancelInstall
         ;;
     *) 
         echo "Undefined Command"
