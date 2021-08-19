@@ -1,4 +1,5 @@
 #!/bin/bash
+source "scripts/misc.sh"
 
 # This script is for installing graphics programs in linux
 # Such as video editors and photo manipulation tools
@@ -39,17 +40,4 @@ function graphicsSuite() {
     sudo apt-get update
 
     exit 1
-}
-
-function graphicsReadme() {
-    clear
-    
-    echo "The following will be installed"
-    echo ""
-    echo "GIMP - Image Manipulator," 
-    echo "Inkscape - Image Manipulator,"
-    echo "OBS - Screencast and Video Editor"
-    echo $nextLine
-    echo "Do you want to install ?"
-    echo "Y/N"
 }

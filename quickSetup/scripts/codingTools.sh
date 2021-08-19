@@ -1,36 +1,21 @@
 #!/bin/bash
 
+source "scripts/misc.sh"
+
+
 # Not all tools are prepared here 
 # So some need to be installed individually
-nextLine=\
+
 
 function codingToolsOption() {
     uploadTools
     vsCode
     nodeInstall
     dataBase
-    jre
+    jdk
     zsh
     CopyProfile
     kvmSetup
-}
-
-function codingToolsReadme() {
-    clear
-    
-    echo "The following will be installed ⚙️ : "
-    echo $nextLine
-    echo "Visual Studio Code - Powerful text editor and IDE," 
-    echo "Node - Powerful library for JavaScript and other node related projects,"
-    echo "Databases - These include Postgresql and Sqlite3"
-    echo "JRE -  This is the Java Runtime Environment"
-    echo "ZSH - Powerful terminal emulator with alot of tricks"
-    echo "Upload & Download Tools - These include git, wget, curl and other essentials"
-    echo "KVM - This is a library for building virtual machines"
-    echo "Preset profiles that would make setting up the environment easier"
-    echo $nextLine
-    echo "Install the tools"
-    echo "Y/N"
 }
 
 
@@ -51,7 +36,7 @@ function databaseOnlyReadme() {
 function vsCode() {
     echo "######Installing VSCODE#####"   
 
-    sudo apt-get install software-properties-common apt-transport-https wget
+    sudo apt-get install software-properties-common apt-transport-https wget -y
 
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 
@@ -106,33 +91,33 @@ function dataBase() {
 
 }
 
-# This is to install the JRE
-# The JDK needs to be downloaded seperately
-# https://www.openlogic.com/openjdk-downloads
+#JDK which includes JRE
 
-#Java Runtime Environment
+# TODO: # Add user option if they want JDK 11 or 16
+#  TODO: # Refactor and optimize code
+# In order to get sub dir of current dir.
+# Assign to variable then use that variable when copying 
+#subDir="$(ls -d */)"
+#
 
-# function jdk_install(){
-#     clear
+function jdk() {
+# TODO: Configure a way to get the latest version instead of one version
+# TODO: Get dir name from downloads after extracting
+    echo "Installing OpenJDK"
 
-#     cd ~/Downloads
-#     wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz
+    cd ~/Downloads
 
-#     tar -xvf openjdk-11+28_linux-x64_bin.tar.gz’
+    wget https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
 
-#     cd openjdk-11+28_linux-x64_bin
+    tar -xvf OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
+    
 
+    mv -r /usr/local/share
 
+    echo export PATH=$PATH:/usr/local/share/jdk-11.0.12+7/bin
+    echo export JAVA_HOME=$JAVA_HOME:/usr/local/share/jdk-11.0.12+7/bin
 
-# }
-
-function jre() {
-
-    echo "Installing JRE Headless"
-
-    sudo apt install default-jre
-    sudo apt install openjdk-11-jre-headless
-
+    rm -f OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
 }
 
 # Zsh terminal
@@ -142,13 +127,12 @@ function zsh() {
 
     echo "Installing ZSH & TMUX"
     sudo apt update
-    sudo apt install zsh
-    #sudo chsh -s $(which zsh)
-    sudo apt-get install tmux
+    sudo apt-get install zsh tmux -y
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" 
-    #sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    #sudo chsh -s $(which zsh)
+
+    #This is to avoid the installation being stuck on ZSH after changing default shell
+    exit 1   
 }
 
 #Profiles setup
@@ -200,12 +184,12 @@ function CopyProfile(){
 #Install git, wget, curl for easy setup
 
 function uploadTools() {
-    sudo apt-get install git wget curl
+    sudo apt-get install git wget curl -y
 }
 
 #Virtual Machine
 function kvmLib() {
-    sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager
+    sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virt-manager -y
 }
 
 function kvmConfig() {
@@ -221,4 +205,8 @@ function kvmSetup() {
     echo "Install virtual machine libraries"
     kvmLib
     kvmConfig
+}
+
+function oracle_Box(){
+    sudo apt-get install virtualbox -y;
 }

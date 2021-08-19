@@ -3,9 +3,38 @@
 source "scripts/graphicsSuite.sh"
 source "scripts/codingTools.sh"
 source "scripts/generalTools.sh"
+source "scripts/misc.sh"
 
+function menuDisplay() {
+    clear
+    #echo $pound$pound$pound$pound$pound$pound$pound$pound$pound$pound$pound
+    poundPrint
+    echo $nextLine
+    echo "$pound Welcome to quickstart Script installer 😉   $pound" 
+    echo "$pound Do you wish to continue yes ✅ or no ❌     $pound"
+    poundPrint
+ 
 
-nextLine=\
+    echo "Choose any one of the options below: "
+
+}
+
+function dispOptions(){
+echo "
+    1) installGraphics  
+    2) codingToolsOnly 
+    3)graphics_coding_tools 
+    4)generalToolsOnly 
+    5)databasesOnly 
+    6)gameOnly 
+    7)cliOnly 
+    8)wpsOffice
+    9)everything
+    0)cancelInstall
+
+"
+}
+
 
 function cancelInstall() {
     echo "Installation cancelled ❌ "
@@ -59,7 +88,7 @@ function installGraphics() {
     graphicsReadme
     echo $nextLine
     
-    read -r -p  option
+    read  option
 
     case $option in 
 	[Yy]* )
@@ -81,7 +110,7 @@ function installGraphics() {
 }
 
 function codingToolsOnly() {
-    codingToolsReadme
+   CodeReadME
    
     read  option
 
@@ -259,35 +288,42 @@ function Fail_Install(){
 }
 
 
-function menuDisplay() {
-    clear
-    echo "Choose any one of the options below: "
-    optionsList
-}
+# function menuDisplay() {
+#     clear
+#     echo "Choose any one of the options below: "
+#     optionsList
+# }
+
+# TODO: # Always refactor when possible
+# TODO: # Research on how to neatly present your options on command line
+# TODO: # Look into fixing line 295: column 5 something about the array?
+# TODO: # Make sure to add fail safes in the event of user error
 
 
 function optionsList() {
     clear
-    select Choice in Graphics_Tools Coding_Tools Graphics_Coding_Tools General_Tools Databases GamingSetup CliTools Everything Exit
-    do 
-       case $Choice in
-	   Graphics_Tools) installGraphics;; 
-	   Coding_Tools) codingToolsOnly;;
-       Graphics_Coding_Tools) graphics_coding_tools;;
-	   General_Tools) generalToolsOnly;;
-       Databases) databasesOnly;;
-       GamingSetup) gameOnly;;
-       CliTools) cliOnly;;
-	   Everything) everything;;
-       Exit) cancelInstall;;
-	    *)exit 1;;
+    menuDisplay
+    dispOptions
+
+    read answer
+       case $answer in
+	   1) installGraphics ; optionsList ;; 
+	   2) codingToolsOnly ; optionsList ;;
+       3)graphics_coding_tools ; optionsList ;;
+	   4)generalToolsOnly ; optionsList ;;
+       5)databasesOnly ; optionsList ;;
+       6)gameOnly ; optionsList ;;
+       7)cliOnly ; optionsList ;;
+       8)wpsOffice ; optionsList ;;
+	   9)everything ; optionsList ;;
+       0)cancelInstall ; optionsList ;;
+	   *) echo "Oops the option isnt listed";;
        esac
-    done
 }
 
 function ThanksMessage(){
     clear
-    green[install_complete]
+    echo ${green[install_complete]}
     echo "Thanks for installing"
     echo "Will exit now"
     exit 1
