@@ -254,20 +254,12 @@ function everything() {
 
 }
 
-declare -A errs
-errs[no_internet]="No internet connection ❌"
-errs[bug]="The script is broken somewhere :("
-
-declare -A green
-green[ok_internet]="Internet connection ok"
-green[install_complete]="Installation Completed without errors"
-
 function Fail_Install(){
 
     if ping -c 1 google.com; then
-        echo ${green[ok_internet]}
+        echo $ok_internet
     else 
-        echo ${errs[no_internet]}
+        echo $no_internet
     fi
     echo "Go back to main menu and retry?"
     read -r -p "Y/N: " answer
@@ -287,12 +279,6 @@ function Fail_Install(){
     esac
 }
 
-
-# function menuDisplay() {
-#     clear
-#     echo "Choose any one of the options below: "
-#     optionsList
-# }
 
 # TODO: # Always refactor when possible
 # TODO: # Research on how to neatly present your options on command line
@@ -323,7 +309,7 @@ function optionsList() {
 
 function ThanksMessage(){
     clear
-    echo ${green[install_complete]}
+    echo $install_complete
     echo "Thanks for installing"
     echo "Will exit now"
     exit 1

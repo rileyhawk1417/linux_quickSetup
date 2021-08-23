@@ -88,7 +88,7 @@ function generalTools() {
 
 
 function cliTools() {
-    sudo apt-get install ncdu htop cmus python python3 python-pip python3-venv python3-pip -y
+    sudo apt-get install ncdu htop cmus unrar rar python python3 python-pip python3-venv python3-pip -y
 #    pip3 install --user gnome-extensions-cli
 
 #    echo PATH=$PATH:${HOME}/.local/bin >>~/.profile

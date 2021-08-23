@@ -103,6 +103,7 @@ function dataBase() {
 function jdk() {
 # TODO: Configure a way to get the latest version instead of one version
 # TODO: Get dir name from downloads after extracting
+# TODO: Try and use pwd and assign to variable then insert variable to cp statement
     echo "Installing OpenJDK"
 
     cd ~/Downloads
