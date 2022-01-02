@@ -4,9 +4,16 @@ source "scripts/misc.sh"
 # This script is for installing graphics programs in linux
 # Such as video editors and photo manipulation tools
 
-# Installing GIMP
+
 
 function gimpInstall() {
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing Gimp
+            $nextLine
+            $pound $pound
+             "
 
     sudo add-apt-repository ppa:otto-kesselgulasch/gimp
 
@@ -14,21 +21,44 @@ function gimpInstall() {
 }
 
 function inkscapeInstall() {
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing InkScape
+            $nextLine
+            $pound $pound
+             "
 
     sudo add-apt-repository ppa:inskcape.dev/stable
 
     sudo apt-get install inkscape
 }
-# When downloading Natron go to the website and get the binaries
-# sudo apt-get install libegl1-mesa
-# Then cd into the directory and run install.sh
 
 function obsInstall() {
-
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing OBS
+            $nextLine
+            $pound $pound
+             "
+             
     sudo add-apt-repository ppa:obsproject/obs-studio
 
     sudo apt-get install obs-studio
 }
+
+    function flameShot(){
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing FlameShot
+            $nextLine
+            $pound $pound
+             "
+
+        sudo apt-get install flameshot -y
+    }
 
 function graphicsSuite() {
     clear
@@ -36,8 +66,11 @@ function graphicsSuite() {
     obsInstall
     inkscapeInstall
     gimpInstall
-
+    flameShot
+    
     sudo apt-get update
 
     exit 1
 }
+
+
