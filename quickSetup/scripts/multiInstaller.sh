@@ -23,15 +23,14 @@ function dispOptions(){
 echo "
     1) installGraphics  
     2) codingToolsOnly 
-    3)graphics_coding_tools 
-    4)generalToolsOnly 
-    5)databasesOnly 
-    6)gameOnly 
-    7)cliOnly 
-    8)wpsOffice
-    9)everything
-    0)cancelInstall
-
+    3) graphics_coding_tools 
+    4) generalToolsOnly 
+    5) databasesOnly 
+    6) gameOnly 
+    7) cliOnly 
+    8) wpsOffice
+    9) everything
+    0) cancelInstall
 "
 }
 
@@ -229,6 +228,8 @@ function cliOnly(){
    esac
 
 }
+
+
 
 function everything() {
     everythingReadme
