@@ -2,16 +2,15 @@
 
 source "scripts/misc.sh"
 
-
 # Not all tools are prepared here 
 # So some need to be installed individually
-
 
 function codingToolsOption() {
     uploadTools
     vsCode
     nodeInstall
     dataBase
+    sdkMan
     jdk
     zsh
     CopyProfile
@@ -22,34 +21,48 @@ function codingToolsOption() {
 function databaseOnlyReadme() {
     clear
 
-    echo "Database Tools will only be installed ⚙️ : "
-    echo $nextLine
-    echo "Postgresql"
-    echo "Sqlite3"
-    echo $nextLine
-    echo "Install the tools?"
-    echo "Y/N"
+    echo "
+            Database Tools will only be installed ⚙️ : 
+            $nextLine
+            Postgresql
+            Sqlite3
+            $nextLine
+            Install the tools?
+            Y/N
+            "
 }
 
 # VSCode
 
 function vsCode() {
-    echo "######Installing VSCODE#####"   
-
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up Visual Studio Code
+            $nextLine
+            $pound $pound
+             "
+     
     sudo apt-get install software-properties-common apt-transport-https wget -y
 
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 
-    sudo apt-get install code
+    sudo apt-get install code -y
 }
 
 # Node 14.x
 
 function nodeInstall() {
-
-    echo "######Installing Node#####"   
+ 
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up Postgresql
+            $nextLine
+            $pound $pound
+             "
 
     curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install -y nodejs
@@ -58,42 +71,42 @@ function nodeInstall() {
 
 #Postgresql
 
-function postgresql() {
-    echo "######Installing PostgreSql#####"   
+function postgresql() { 
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up Postgresql
+            $nextLine
+            $pound $pound
+             "
 
 # Create the file repository configuration:
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
-# Import the repository signing key:
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+# Import the postgresql repository signing key:
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-# Update the package lists:
-sudo apt-get update
-
-# Install the latest version of PostgreSQL.
+    sudo apt-get update
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
-sudo apt-get -y install postgresql
-
+    sudo apt-get -y install postgresql
 }
 
 
 #SQLite3
 function sqlite() {
-
-    sudo apt install sqlite3
-
+    sudo apt-get install sqlite3 -y
 }
 
 function dataBase() {
-
     postgresql
     sqlite
-
 }
 
-#JDK which includes JRE
+function sdkMan(){
+    curl -s "https://get.sdkman.io" | bash
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+}
 
-# TODO: # Add user option if they want JDK 11 or 16
 #  TODO: # Refactor and optimize code
 # In order to get sub dir of current dir.
 # Assign to variable then use that variable when copying 
@@ -101,32 +114,57 @@ function dataBase() {
 #
 
 function jdk() {
-# TODO: Configure a way to get the latest version instead of one version
-# TODO: Get dir name from downloads after extracting
-# TODO: Try and use pwd and assign to variable then insert variable to cp statement
-    echo "Installing OpenJDK"
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up JDK
+            $nextLine
+            $pound $pound
+             "
 
-    cd ~/Downloads
+    sdk install java
 
-    wget https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
+    clear
 
-    tar -xvf OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
-    
+    echo "For more instructions use sdk --help"
 
-    mv -r /usr/local/share
-
-    echo export PATH=$PATH:/usr/local/share/jdk-11.0.12+7/bin
-    echo export JAVA_HOME=$JAVA_HOME:/usr/local/share/jdk-11.0.12+7/bin
-
-    rm -f OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz
 }
 
-# Zsh terminal
+function code_Tools(){
+    read -r -p option
+
+    case $option in 
+	[Yy]* )
+            sdkMan
+            jdk    
+            echo "Installing the SDK's"
+        else 
+            Fail_Install
+        fi
+        ;;
+	 [Nn]* )
+            echo "Skipping SDK's"
+            CopyProfile
+         ;;
+	 *)
+	     echo "Command not recognized"
+         exit 1
+         ;;
+   esac
+
+
+}
 
 function zsh() {
     clear
-
-    echo "Installing ZSH & TMUX"
+ 
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up ZSH & TMUX
+            $nextLine
+            $pound $pound
+             "
     sudo apt update
     sudo apt-get install zsh tmux -y
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" 
@@ -141,7 +179,8 @@ function zsh() {
 function profileSchema(){
 
     echo "Copying fonts to Desktop"
-    cp -r scripts/extra/fonts -t ~/Desktop 
+    cp -r scripts/extra/fonts -t ~/Desktop
+    fc-cache 
     echo "Fonts have been copied"
     echo $nextLine
     echo "Copying profiles to home directory"
@@ -157,7 +196,7 @@ function profileSchema(){
 
 }
 
-#Copy Preset Profiles and setup environment
+#Copy Preset Profiles and shell environment
 
 function CopyProfile(){
     clear
@@ -169,6 +208,7 @@ function CopyProfile(){
     case $option in 
 	[Yy]* )
             profileSchema
+            kvmSetup
              ;;
 	 [Nn]* )
             echo "Skipping profiles and installing KVM"
@@ -182,7 +222,6 @@ function CopyProfile(){
 
 }
 
-#Install git, wget, curl for easy setup
 
 function uploadTools() {
     sudo apt-get install git wget curl -y
@@ -203,11 +242,82 @@ function kvmConfig() {
 function kvmSetup() {
     clear
 
-    echo "Install virtual machine libraries"
+    
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up KVM
+            $nextLine
+            $pound $pound
+             "
+             
     kvmLib
     kvmConfig
 }
 
 function oracle_Box(){
-    sudo apt-get install virtualbox -y;
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up VirtualBox
+            $nextLine
+            $pound $pound
+             "
+    
+    # Get keys and register them
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+
+    
+    sudo apt-get update
+    sudo apt-get install virtualbox-6.1
 }
+
+function bashTop(){
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up BashTop
+            $nextLine
+            $pound $pound
+             "
+    sudo add-apt-repository ppa:bashtop-monitor/bashtop
+
+    sudo apt update
+    sudo apt install bashtop
+}
+
+function installGuake(){
+    echo "
+            $pound $pound 
+            $nextLine
+            Installing and setting up Guake
+            $nextLine
+            $pound $pound
+             "
+    sudo apt update
+    sudo apt-get install guake
+}
+
+function installHomeBrew(){
+    # Install dependancies
+    sudo apt-get install build-essential procps curl file git
+
+    # Get Homebrew and install 
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Test to ensure HomeBrew is working
+    brew install hello
+}
+
+function installNvim(){
+    # Install latest version from brew and not apt
+
+    brew install neovim
+    # Install package manager
+
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+}
+
+
