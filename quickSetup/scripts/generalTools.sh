@@ -93,9 +93,23 @@ function cliTools() {
 
 #    echo PATH=$PATH:${HOME}/.local/bin >>~/.profile
 #   echo PATH=$PATH:${HOME}/.local/bin >>~/.zshrc
+    
+    # fd-find is an alternative find tools
+    # bat is an alterntive to the cat command
+    # httpie is meant to be an alternative for wget and curl
+    sudo apt install fd-find bat httpie
 
 }
 
 function games() {
     sudo apt-get install steam lutris -y
+    joyStickDrivers 
+}
+
+function joyStickDrivers(){
+    # Ubuntu Xbox Drivers
+    sudo apt-add-repository -y ppa:rael-gc/ubuntu-xboxdrv
+
+    sudo apt-get update
+    sudo apt-get install ubuntu-xboxdrv
 }
