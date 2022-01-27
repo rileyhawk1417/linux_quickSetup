@@ -7,11 +7,7 @@
 # source "quickSetup/scripts/colors.sh"
 
 
-source "scripts/codingTools.sh" 
-source "scripts/graphicsSuite.sh" 
-source "scripts/multiInstaller.sh"
-source "scripts/generalTools.sh"
-source "scripts/misc.sh"
+# TODO: Rewrite script for arch distro and connect everything
 
 function helpMsg() {
   echo "
