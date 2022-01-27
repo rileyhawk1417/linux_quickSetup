@@ -1,27 +1,23 @@
 #!/bin/bash
-# This file pth is only for debugging in VSCode
+# This file path is only for debugging in VSCode
 # source "quickSetup/scripts/codingTools.sh" 
 # source "quickSetup/scripts/graphicsSuite.sh" 
 # source "quickSetup/scripts/multiInstaller.sh"
 # source "quickSetup/scripts/generalTools.sh"
 # source "quickSetup/scripts/colors.sh"
 
-
-source "scripts/codingTools.sh" 
-source "scripts/graphicsSuite.sh" 
-source "scripts/multiInstaller.sh"
-source "scripts/generalTools.sh"
+# TODO: Fix installer to detect or help user choose type of distro and script
 source "scripts/misc.sh"
 
 function helpMsg() {
   echo "
   Shortcuts or flags to trigger bypassing wizard
   Or install a specific program
-  Command                                   --Options/Long Notation 
-  -c | --coding                             --coding, flag installs tools only in the coding section
-  -g | --graphics                           --graphics, flag installs tools only in the graphics section
-  -m | --minimal                            --minimal, flag installs tools only in the general section
-                                            --help:  prints help message and exits
+  Command/Flags
+  -c | --coding                                               --coding, flag installs tools only in the coding section
+  -g | --graphics                                           --graphics, flag installs tools only in the graphics section
+  -m | --minimal                                            --minimal, flag installs tools only in the general section
+                                                                      --help:  prints help message and exits
     "
   exit
 }
