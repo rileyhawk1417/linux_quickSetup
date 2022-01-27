@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source "scripts/graphicsSuite.sh"
-source "scripts/codingTools.sh"
-source "scripts/generalTools.sh"
+source "scripts/graphicsUtils.sh"
+source "scripts/codingUtils.sh"
+source "scripts/essentialUtils.sh"
 source "scripts/misc.sh"
 
 function menuDisplay() {
