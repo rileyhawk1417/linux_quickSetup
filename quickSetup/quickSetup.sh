@@ -14,25 +14,25 @@ function helpMsg() {
   Shortcuts or flags to trigger bypassing wizard
   Or install a specific program
   Command/Flags
-  -c | --coding                                               --coding, flag installs tools only in the coding section
-  -g | --graphics                                           --graphics, flag installs tools only in the graphics section
-  -m | --minimal                                            --minimal, flag installs tools only in the general section
-                                                                      --help:  prints help message and exits
+  -c | --rice                                           --coding, flag downloads rice/customization scripts.
+  -g | --arch                                           --graphics, flag downloads arch scripts.
+  -m | --ubuntu                                         --ubuntu, flag downloads ubuntu scripts.
+                                                        --help:  prints help message and exits
     "
   exit
 }
 
     while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
-      -c | --coding )
-        codingToolsOnly 
+      -r | --rice )
+        rice_setup 
         exit
         ;;
-      -g | --graphics )
-        graphicsSuite 
+      -a | --arch )
+        arch_setup 
         exit
         ;;
-      -m | --minimal )
-        generalTools 
+      -u | --ubuntu )
+        ubuntu_scripts 
         exit
         ;;
       -h | --help )
