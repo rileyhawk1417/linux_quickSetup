@@ -1,7 +1,9 @@
 # Install necessary configs for awesome desktop
 
+# Picom is to reduce screen tearing
+
 function awesomeWM(){
-    sudo pacman -S awesome
+    sudo pacman -S awesome picom
 }
 
 function notifications(){
