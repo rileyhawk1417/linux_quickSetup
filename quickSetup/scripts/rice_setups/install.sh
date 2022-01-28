@@ -12,5 +12,12 @@ function launchers(){
     sudo pacman -S rofi
 }
 
+function startUp(){
+    sudo pacman -S plymouth
+}
+
+function displayManagers(){
+    sudo pacman -S lightdm-plymouth
+}
 
 
