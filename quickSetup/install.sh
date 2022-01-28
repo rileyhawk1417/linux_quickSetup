@@ -44,6 +44,6 @@ function helpMsg() {
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; 
     else 
-      optionsList
+      menuDisplay
     fi
 
