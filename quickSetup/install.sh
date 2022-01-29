@@ -1,16 +1,7 @@
 #!/bin/bash
-# This file pth is only for debugging in VSCode
-# source "quickSetup/scripts/codingTools.sh" 
-# source "quickSetup/scripts/graphicsSuite.sh" 
-# source "quickSetup/scripts/multiInstaller.sh"
-# source "quickSetup/scripts/generalTools.sh"
-# source "quickSetup/scripts/colors.sh"
 
+# TODO: Remember to import rice scripts here
 
-source "scripts/codingTools.sh" 
-source "scripts/graphicsSuite.sh" 
-source "scripts/multiInstaller.sh"
-source "scripts/generalTools.sh"
 source "scripts/misc.sh"
 
 function helpMsg() {
