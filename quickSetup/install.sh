@@ -8,6 +8,7 @@
 
 # TODO: Fix installer to detect or help user choose type of distro and script
 source "scripts/misc.sh"
+source "scripts/lazyScript.sh"
 
 function helpMsg() {
   echo "
