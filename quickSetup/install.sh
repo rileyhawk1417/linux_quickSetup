@@ -7,21 +7,22 @@
 # source "quickSetup/scripts/colors.sh"
 
 
-source "scripts/codingTools.sh" 
-source "scripts/graphicsSuite.sh" 
-source "scripts/multiInstaller.sh"
-source "scripts/generalTools.sh"
+source "scripts/lazyScript.sh"
 source "scripts/misc.sh"
 
 function helpMsg() {
   echo "
   Shortcuts or flags to trigger bypassing wizard
   Or install a specific program
-  Command                                   --Options/Long Notation 
-  -c | --coding                             --coding, flag installs tools only in the coding section
-  -g | --graphics                           --graphics, flag installs tools only in the graphics section
-  -m | --minimal                            --minimal, flag installs tools only in the general section
-                                            --help:  prints help message and exits
+  Command                                       --Options/Long Notation 
+  -c     | --coding                             --coding, flag installs coding tools.
+  -gfx   | --graphics                           --graphics, flag installs graphics tools.
+  -m     | --minimal                            --minimal, flag installs general tools.
+  -db    | --databases                          --databases, flag installs database tools.
+  -cli   | --terminal                           --terminal, flag installs cli tools.
+  -g     | --game                               --game, flag installs game launchers.                                           
+  -a     | --all                                --all, flag bypasses setup and installs everything.                                            
+                                                --help:  prints help message and exits.
     "
   exit
 }
@@ -31,12 +32,28 @@ function helpMsg() {
         codingToolsOnly 
         exit
         ;;
-      -g | --graphics )
+      -gfx | --graphics )
         graphicsSuite 
         exit
         ;;
       -m | --minimal )
-        generalTools 
+        generalToolsOnly 
+        exit
+        ;;
+      -db | --databases )
+        databasesOnly 
+        exit
+        ;;
+      -cli | --cli )
+        cliOnly 
+        exit
+        ;;
+      -g | --game )
+        gameOnly 
+        exit
+        ;;
+      -a | --all )
+        everything 
         exit
         ;;
       -h | --help )
@@ -48,6 +65,6 @@ function helpMsg() {
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; 
     else 
-      optionsList
+      menuDisplay
     fi
 
