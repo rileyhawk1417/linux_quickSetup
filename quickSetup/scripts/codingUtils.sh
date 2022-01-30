@@ -14,7 +14,10 @@ function codingToolsOption() {
     jdk
     zsh
     CopyProfile
-    kvmSetup
+    sdks
+    virtualMachines
+    cli_programs
+
 }
 
 
@@ -130,7 +133,7 @@ function jdk() {
 
 }
 
-function code_Tools(){
+function sdks(){
     read -r -p option
 
     case $option in 
@@ -273,6 +276,32 @@ function oracle_Box(){
     sudo apt-get install virtualbox-6.1
 }
 
+function virtualMachines(){
+    read -r -p option
+
+    case $option in 
+	[Yy]* )
+            kvmSetup
+            oracle_box    
+            echo "Installing KVM libraries and Oracle Box"
+        else 
+            Fail_Install
+        fi
+        ;;
+	 [Nn]* )
+            echo "Skipping Oracle Box and installing KVM libraries"
+            kvmSetup
+         ;;
+	 *)
+	     echo "Command not recognized"
+         exit 1
+         ;;
+   esac
+
+
+}
+
+
 function bashTop(){
     echo "
             $pound $pound 
@@ -318,6 +347,41 @@ function installNvim(){
 
     git clone --depth 1 https://github.com/wbthomason/packer.nvim\
      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+}
+
+function githubCli(){
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
+    sudo apt update
+    sudo apt install gh
+}
+
+function cli_programs(){
+    read -r -p option
+
+    case $option in 
+	[Yy]* )
+            installHomeBrew
+            installNvim
+            installGuake
+            githubCli
+            echo "Installing HomeBrew, NeoVim, Guake, Github CLI"
+        else 
+            Fail_Install
+        fi
+        ;;
+	 [Nn]* )
+            echo "Skipping SDK's"
+            CopyProfile
+         ;;
+	 *)
+	     echo "Command not recognized"
+         exit 1
+         ;;
+   esac
+
+
 }
 
 
