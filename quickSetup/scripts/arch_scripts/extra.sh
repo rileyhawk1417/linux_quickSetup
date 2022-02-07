@@ -1,6 +1,6 @@
 function radeon_profile(){
   # Function to install radeon profile for amd cards
-  sudo pamac install radeon-profile-daemon radeon-profile
+  sudo pamac install radeon-profile-daemon radeon-profile --noconfirm
 
   sudo systemctcl enable radeon-radeon-profile-daemon
 

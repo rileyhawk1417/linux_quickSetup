@@ -1,16 +1,16 @@
 function archivers(){
-    sudo pacman -S p7zip p7zip-plugins unrar tar rsync
+    sudo pacman -S p7zip p7zip-plugins unrar tar rsync --noconfirm
 }
 
 function codecs(){
-    sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins
+    sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins --noconfirm
 }
 
 function helpers(){
     # Download helpers in download folder and delete after
 
     # Install yay aur helper
-    sudo pacman -S --needed git base-devel
+    sudo pacman -S --needed git base-devel --noconfirm
     cd ~/Downloads
     mkdir helpers
     cd helpers
@@ -21,7 +21,7 @@ function helpers(){
 
     # Install paru helper
  
-    sudo pacman -S --needed base-devel
+    sudo pacman -S --needed base-devel --noconfirm
     git clone https://aur.archlinux.org/paru.git
     cd paru
     makepkg -si
@@ -41,7 +41,7 @@ function enableAur(){
 
 function enableSnap(){
     # Install snap
-    sudo pamac install snapd libpamac-snap-plugin
+    sudo pamac install snapd libpamac-snap-plugin --noconfirm
 
     # Start snap services
     sudo systemctl enable --now snapd.socket
@@ -57,7 +57,7 @@ function stores(){
     # Install aur helpers both yay and paru
     helpers
     # Install flatpak
-    sudo pamac install flatpak libpamac-flatpak-plugin
+    sudo pamac install flatpak libpamac-flatpak-plugin --noconfirm
     
     # Install Snap
     enableSnap
@@ -85,8 +85,8 @@ function productivity(){
   sudo snap install superproductivity
 
   # Install notable
-  sudo pamac install notable-bin
+  sudo pamac install notable-bin --noconfirm
 
   # Install joplin
-  sudo pamac instal joplin-desktop-bin
+  sudo pamac instal joplin-desktop-bin --noconfirm
 }

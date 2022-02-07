@@ -1,5 +1,5 @@
 function terminals(){
-    sudo pacman -S kitty guake
+    sudo pacman -S kitty guake --noconfirm
 }
 
 function homeBrew(){
@@ -14,11 +14,11 @@ function githubCLI(){
 
 function VM_Utils(){
     # Install necessary libraries
-    sudo pacman -S qemu libvirt iptables-nft dnsmasq virt-manager
+    sudo pacman -S qemu libvirt iptables-nft dnsmasq virt-manager --noconfirm
     # Start the service
-    sudo systemctl start libvirtd
+    sudo systemctl start libvirtd --noconfirm
     #Enable the service
-    sudo systemctl enable libvirtd
+    sudo systemctl enable libvirtd --noconfirm
     #Allow current user to use service
     sudo usermod -aG libvirt $USER
 }
