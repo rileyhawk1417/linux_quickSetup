@@ -1,11 +1,6 @@
 #!/bin/bash
-# This file pth is only for debugging in VSCode
-# source "quickSetup/scripts/codingTools.sh" 
-# source "quickSetup/scripts/graphicsSuite.sh" 
-# source "quickSetup/scripts/multiInstaller.sh"
-# source "quickSetup/scripts/generalTools.sh"
-# source "quickSetup/scripts/colors.sh"
 
+source "scripts/multiInstaller.sh";
 
 # TODO: Rewrite script for arch distro and connect everything
 
@@ -24,11 +19,13 @@ function helpMsg() {
 
     while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
       -c | --coding )
-        codingToolsOnly 
+        codingTools
+        essentials
         exit
         ;;
       -g | --graphics )
-        graphicsSuite 
+        mediaUtils
+        essentials
         exit
         ;;
       -m | --minimal )
@@ -44,6 +41,6 @@ function helpMsg() {
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; 
     else 
-      optionsList
+     echo "Call Main Function"; 
     fi
 
