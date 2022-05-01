@@ -74,6 +74,26 @@ function stores(){
 
 # Add function to decide productivity
 
+function noteChoice(){
+  while [[ "$1" =~ ^-&& ! "$" == "--" ]]; do case $1 in
+    -p | --planner )
+        flatpak install flathub.com.alainm23.planner
+        flatpak run com.github.alainm23.planner
+        ;;
+    -j | --joplin )
+        paru -S install joplin-desktop-bin --noconfirm
+        ;;
+    * )
+        echo "Undefined"
+        ;;
+      esac; shift; done
+      if[[ "$1" == '--' ]]; then shift;
+      else
+        echo "Script Broken"
+      fi
+
+}
+
 function productivity(){
   # Install Planner
   flatpak install flathub com.github.alainm23.planner
@@ -81,12 +101,6 @@ function productivity(){
   # Run planner to test install
   flatpak run com.github.alainm23.planner
 
-  # Install superproductivity
-  sudo snap install superproductivity
-
-  # Install notable
-  sudo pamac install notable-bin --noconfirm
-
   # Install joplin
-  sudo pamac instal joplin-desktop-bin --noconfirm
+  sudo pamac install joplin-desktop-bin --noconfirm
 }

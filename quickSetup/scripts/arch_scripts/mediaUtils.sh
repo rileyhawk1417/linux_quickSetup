@@ -1,8 +1,8 @@
-function video(){
-    sudo pacman -S obs-studio shotcut --noconfirm
+function videoEditors(){
+    sudo pacman -S obs-studio shotcut vlc --noconfirm
 }
 
-function photos(){
+function photosEditors(){
     sudo pacman -S flameshot darktable gimp inkspace krita --noconfirm
 }
 
