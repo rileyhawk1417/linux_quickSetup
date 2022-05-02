@@ -25,6 +25,7 @@ function essentials(){
   enableSnap
   stores
   productivity
+  wpsOffice
 }
 
 function mediaUtils(){  
@@ -33,7 +34,46 @@ function mediaUtils(){
   photoEditors
 }
 
-function mainMenu(){
+function mediaTools(){
+  codecs
+  mediaUtils
+}
+
+function cliTools(){
+  btopMonitor
+  yt_DLP
+  homeBrew
+  githubCLI
+  glowMD
+}
+
+function packageManagers(){
+  enableSnap
+  enableAur
+  helpers
+  stores
+}
+
+function codingSuite(){
+  codingTools
+  cliTools
+  packageManagers
+}
+
+function theBasics(){
+  packageManagers
+  archivers
+  mediaTools
+  productivity
+}
+
+function everything(){
+  codingTools
+  essentials
+  mediaUtils
+}
+
+function menuDisplay(){
   echo "
   Linux Setup:
   This setup is aimed at installing Arch components.
@@ -48,6 +88,27 @@ function mainMenu(){
   8. Basics (Package Managers, Archivers, Media Tools, Productivity)
   9. Install All
   "
-  read 
+  #read choice
 
+}
+
+
+function mainMenu() {
+    clear
+    menuDisplay
+
+    read answer
+       case $answer in
+     1) terminals ; optionsList ;; 
+     2) mediaTools ; optionsList ;;
+     3) productivity ; optionsList ;;
+     4) cliTools ; optionsList ;;
+     5) packageManagers ; optionsList ;;
+     6) archivers ; optionsList ;;
+     7) codingSuite ; optionsList ;;
+     8) theBasics ; optionsList ;;
+     9) everything ; optionsList ;;
+     0) cancelInstall ; optionsList ;;
+     *) echo "Oops the option isnt listed";;
+       esac
 }
