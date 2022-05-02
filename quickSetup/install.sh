@@ -41,6 +41,6 @@ function helpMsg() {
     esac; shift; done
     if [[ "$1" == '--' ]]; then shift; 
     else 
-     echo "Call Main Function"; 
+     mainMenu 
     fi
 
