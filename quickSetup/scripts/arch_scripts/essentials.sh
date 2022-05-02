@@ -41,7 +41,7 @@ function enableAur(){
 
 function enableSnap(){
     # Install snap
-    sudo pamac install snapd libpamac-snap-plugin --noconfirm
+    paru install snapd libpamac-snap-plugin --noconfirm
 
     # Start snap services
     sudo systemctl enable --now snapd.socket
@@ -64,9 +64,8 @@ function stores(){
 
     # Test Installation
 
-    snap version
+    snap --version
     flatpak --version
-    pamac --version
     yay --version
     paru --version
 
@@ -87,7 +86,7 @@ function noteChoice(){
         echo "Undefined"
         ;;
       esac; shift; done
-      if[[ "$1" == '--' ]]; then shift;
+      if [[ "$1" == '--' ]]; then shift;
       else
         echo "Script Broken"
       fi
@@ -102,5 +101,5 @@ function productivity(){
   flatpak run com.github.alainm23.planner
 
   # Install joplin
-  sudo pamac install joplin-desktop-bin --noconfirm
+  paru install joplin-desktop-bin --noconfirm
 }
