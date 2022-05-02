@@ -99,16 +99,16 @@ function mainMenu() {
 
     read answer
        case $answer in
-     1) terminals ; optionsList ;; 
-     2) mediaTools ; optionsList ;;
-     3) productivity ; optionsList ;;
-     4) cliTools ; optionsList ;;
-     5) packageManagers ; optionsList ;;
-     6) archivers ; optionsList ;;
-     7) codingSuite ; optionsList ;;
-     8) theBasics ; optionsList ;;
-     9) everything ; optionsList ;;
-     0) cancelInstall ; optionsList ;;
+     1) terminals ; mainMenu ;; 
+     2) mediaTools ; mainMenu ;;
+     3) productivity ; mainMenu ;;
+     4) cliTools ; mainMenu ;;
+     5) packageManagers ; mainMenu ;;
+     6) archivers ; mainMenu ;;
+     7) codingSuite ; mainMenu ;;
+     8) theBasics ; mainMenu ;;
+     9) everything ; mainMenu ;;
+     0) cancelInstall ; mainMenu ;;
      *) echo "Oops the option isnt listed";;
        esac
 }
