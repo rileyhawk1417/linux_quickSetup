@@ -101,3 +101,7 @@ function productivity(){
   # Install joplin
   paru -S joplin-desktop-bin --noconfirm
 }
+
+function onlineStorage(){
+    paru -S internxt-drive-bin megasync google-drive-desktop --noconfirm
+}

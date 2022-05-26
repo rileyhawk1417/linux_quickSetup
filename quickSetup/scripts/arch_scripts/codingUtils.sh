@@ -80,10 +80,50 @@ function getSdks(){
     sdk install java 18.0.1.fx-zulu
 }
 
+function getHerokuCli(){
+    paru -S npm heroku-cli
+}
+
+function getCli(){
+    paru -S thefuck httpie cmus neofetch
+}
+
+function getPHP(){
+    paru -S php php-pgsql php81-pdo
+}
+
 # Setup rust toolchain
 function rustSetup(){
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     source $HOME/.cargo/env
     rustup toolchain install stable
     rustup default stable
+}
+
+# Setup AppFlowy Dev
+function getDeps(){
+    paru -S curl base-devel sqlite openssl clang cmake ninja pkg-config gtk3 unzip
+}
+
+function setupFlutter(){
+    git clone https://github.com/flutter/flutter.git
+    cd flutter
+    echo "export PATH=\$PATH:"`pwd`"/bin" >> ~/.profile
+    export PATH="$PATH:`pwd`/bin"
+
+    flutter channel stable
+    flutter config --enable-linux-desktop
+    flutter doctor
+
+}
+
+function buildSDK(){
+    cd AppFlowy/frontend
+    cargo install --force cargo-make duckscript_cli
+    cargo make flowy_dev
+}
+
+function buildAF(){
+    cargo make --profile development-linux86 flowy-sdk-dev
+    cargo make -p development-linux-x86 appflowy-linux-dev
 }
