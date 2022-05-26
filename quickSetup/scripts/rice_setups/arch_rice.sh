@@ -17,11 +17,12 @@ function fixes(){
         MatchIsTouchPad "On"
         Option "Tapping" "On"
         Option "TappingButtonMap" "lmr"
-        Option "TappingDrag" "On"
-        Option "TappingDragLock" "On"
-        Option "DisableWhileTyping" "On"
-        Option "NaturalScrolling" "On"
-        Option "HorizontalScrolling" "On"
+        Option "ClickMethod" "clickfinger"
+        Option "TappingDrag" "true"
+        Option "TappingDragLock" "true"
+        Option "DisableWhileTyping" "true"
+        Option "NaturalScrolling" "true"
+        Option "HorizontalScrolling" "true"
     EndSection
     " >> /etc/X11/xorg.conf.d/70-touchpad-settings.conf
 
