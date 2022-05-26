@@ -1,26 +1,26 @@
+
+# Install archovers
 function archivers(){
     sudo pacman -S p7zip p7zip-plugins unrar tar rsync --noconfirm
 }
 
+# Install media codecs
 function codecs(){
     sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins --noconfirm
 }
 
-function helpers(){
-    # Download helpers in download folder and delete after
+# Install browser and download manager
+function browser(){
+    paru -S vivaldi freedownloadmanager --noconfirm
+}
 
-    # Install yay aur helper
-    sudo pacman -S --needed git base-devel --noconfirm
-    cd ~/Downloads
-    mkdir helpers
-    cd helpers
-    git clone https://aur.archlinux.org/yay.git
-    cd yay
-    makepkg -si
-    cd ../
+
+
+function helper(){
+    # Download helper in download folder and delete after
 
     # Install paru helper
- 
+
     sudo pacman -S --needed base-devel --noconfirm
     git clone https://aur.archlinux.org/paru.git
     cd paru
@@ -31,12 +31,10 @@ function helpers(){
 }
 
 function enableAur(){
-    # Enable aur 
+    # Enable aur
     sudo sed --in-place "s/#EnableAUR/EnableAUR/" "/etc/pamac.conf"
     #Check AUR updates
     sudo sed --in-place "s/#CheckAURUpdates/CheckAURUpdates/" "/etc/pamac.conf"
-
-  
 }
 
 function enableSnap(){
@@ -48,17 +46,17 @@ function enableSnap(){
 
     # Enable support for classic snaps
     ln -s /var/lib/snapd/snap /snap
-  
+
 }
 
 function stores(){
     enableAur
 
     # Install aur helpers both yay and paru
-    helpers
+    helper
     # Install flatpak
     sudo pamac install flatpak libpamac-flatpak-plugin --noconfirm
-    
+
     # Install Snap
     enableSnap
 
@@ -101,5 +99,5 @@ function productivity(){
   flatpak run com.github.alainm23.planner
 
   # Install joplin
-  paru install joplin-desktop-bin --noconfirm
+  paru -S joplin-desktop-bin --noconfirm
 }
