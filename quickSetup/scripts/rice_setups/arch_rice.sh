@@ -17,11 +17,26 @@ function fixes(){
         MatchIsTouchPad "On"
         Option "Tapping" "On"
         Option "TappingButtonMap" "lmr"
+        Option "TappingDrag" "On"
+        Option "TappingDragLock" "On"
+        Option "DisableWhileTyping" "On"
+        Option "NaturalScrolling" "On"
+        Option "HorizontalScrolling" "On"
     EndSection
     " >> /etc/X11/xorg.conf.d/70-touchpad-settings.conf
 
     # Install brightness, screamsink & picom compositor
     paru -S picom scream brightnessctl --noconfirm
+}
+
+
+function dracula(){
+    paru -S lxappearance
+    wget https://github.com/dracula/gtk/files/5214870/Dracula.zip
+}
+
+function keyboardLayout(){
+    paru -S xfce4-xkb-plugin
 }
 
 function notifications(){
