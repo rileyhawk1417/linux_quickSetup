@@ -16,7 +16,7 @@ function fixes(){
         Driver "libinput"
         MatchIsTouchPad "On"
         Option "Tapping" "On"
-        Option "TappingButtonMap" "lmr"
+        Option "TappingButtonMap" "lrm"
         Option "ClickMethod" "clickfinger"
         Option "TappingDrag" "true"
         Option "TappingDragLock" "true"
