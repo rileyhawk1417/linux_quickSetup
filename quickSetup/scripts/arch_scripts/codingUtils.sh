@@ -17,8 +17,9 @@ function githubCLI(){
 # Glow MarkDown Reader
 # fd is a fuzzy file finder, bat is similar to less but with syntax highlighting.
 # Glow is a markdown reader.
+# tldr is for "Too Long Didnt Read"
 function cliDocs(){
-    paru -S glow bat fd --noconfirm
+    paru -S glow bat fd tldr --noconfirm
 }
 
 function launchers(){
@@ -85,11 +86,47 @@ function getHerokuCli(){
 }
 
 function getCli(){
-    paru -S thefuck httpie cmus neofetch
+    paru -S thefuck httpie cmus neofetch exa ncdu ripgrep
 }
 
 function getPHP(){
     paru -S php php-pgsql php81-pdo
+}
+
+function getZSH(){
+    # Get default zsh bin
+    paru -S zsh
+
+    # Get Oh-my-zsh using curl
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    # Install powerlevel10k theme
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+    # Install auto-suggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+}
+
+
+# Setup docker and respective containers
+function setupDocker(){
+    paru -Sq docker containerd docker-compose
+
+    # Start docker services.
+    sudo systemctl start docker.service
+
+    # Auto start docker services on boot
+    sudo systemctl enable docker.service
+
+    # Add docker to root user
+    sudo usermod -aG docker $USER
+
+}
+
+# Setup Oracle Virtual Box
+function setupVBox(){
+    paru -S virtualbox
+    sudo modprobe vboxdrv
 }
 
 # Setup rust toolchain

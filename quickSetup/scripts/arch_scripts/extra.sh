@@ -8,6 +8,13 @@ function radeon_profile(){
 
 }
 
+# A Gentle Reminder
+#The radeon R5 M230 is for my personal laptop
+# The card is a Sea Islands card not Southern
+#Below is the config
+# Southern Islands (SI): radeon.si_support=0 amdgpu.si_support=1
+# Sea Islands (CIK): radeon.cik_support=0 amdgpu.cik_support=1
+
 function editModprobe(){
   sudo touch /etc/modprobe.d/amdgpu.conf
 
