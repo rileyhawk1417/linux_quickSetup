@@ -3,7 +3,7 @@ function videoEditors(){
 }
 
 function photosEditors(){
-    sudo pacman -S flameshot darktable gimp inkspace krita --noconfirm
+    sudo pacman -S flameshot darktable gimp inkscape krita --noconfirm
 }
 
 

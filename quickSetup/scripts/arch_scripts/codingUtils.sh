@@ -1,6 +1,6 @@
 # Mostly I dont use one terminal I just have a variety
 function terminals(){
-    sudo pacman -S kitty --noconfirm
+    sudo pacman -S kitty alacritty --noconfirm
 }
 
 function homeBrew(){
@@ -38,7 +38,7 @@ function yt_DLP(){
 
 # Install text editors
 function editors(){
-    paru -S neovim vim visual-studio-code-bin --noconfirm
+    paru -S neovim nvim-packer vim visual-studio-code-bin --noconfirm
 }
 
 # Intellij family editors
@@ -86,7 +86,7 @@ function getHerokuCli(){
 }
 
 function getCli(){
-    paru -S thefuck httpie cmus neofetch exa ncdu ripgrep
+    paru -S thefuck httpie cmus neofetch exa ncdu ripgrep ranger
 }
 
 function getPHP(){
@@ -110,7 +110,7 @@ function getZSH(){
 
 # Setup docker and respective containers
 function setupDocker(){
-    paru -Sq docker containerd docker-compose
+    paru -S docker containerd docker-compose --noconfirm
 
     # Start docker services.
     sudo systemctl start docker.service
