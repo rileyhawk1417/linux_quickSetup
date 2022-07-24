@@ -125,7 +125,10 @@ function setupDocker(){
 
 # Setup Oracle Virtual Box
 function setupVBox(){
-    paru -S virtualbox
+    mhwd-kernel -li | grep  "(linux"
+    # Somehow its supposed to get the kernel version from the text o_o
+    paru -S virtualbox linux515-virtualbox-host-modules
+    sudo vboxreload
     sudo modprobe vboxdrv
 }
 
