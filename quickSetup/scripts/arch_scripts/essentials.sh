@@ -9,12 +9,10 @@ function codecs(){
     sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins --noconfirm
 }
 
-# Install browser and download manager
+# Install browser's and download manager
 function browser(){
-    paru -S vivaldi freedownloadmanager --noconfirm
+    paru -S brave-bin opera freedownloadmanager --noconfirm
 }
-
-
 
 function helper(){
     # Download helper in download folder and delete after
@@ -103,5 +101,5 @@ function productivity(){
 }
 
 function onlineStorage(){
-    paru -S internxt-drive-bin megasync google-drive-desktop --noconfirm
+    paru -S internxt-drive-bin megasync  --noconfirm
 }

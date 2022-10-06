@@ -6,9 +6,8 @@ source "scripts/arch_scripts/essentials.sh"
 source "scripts/arch_scripts/mediaUtils.sh"
 
 function codingTools(){
-  #Collect functions from there.
   terminals
-  # Test if sys is 64 bit before installing homeBrew
+  #TODO: Test if sys is 64 bit before installing homeBrew
   githubCLI
   glowMD
   btopMonitor
@@ -17,19 +16,18 @@ function codingTools(){
 }
 
 function essentials(){
-  #Collect functions from there.
   archivers
   codecs
   helpers
   enableAur
   enableSnap
   stores
-  productivity
-  wpsOffice
+  #productivity
+  #wpsOffice
+  #TODO: Fix install for onlyoffice
 }
 
-function mediaUtils(){  
-  #Collect functions from there.
+function mediaUtils(){
   videoEditors
   photoEditors
 }
@@ -42,7 +40,7 @@ function mediaTools(){
 function cliTools(){
   btopMonitor
   yt_DLP
-  homeBrew
+  #homeBrew
   githubCLI
   glowMD
 }
@@ -64,7 +62,7 @@ function theBasics(){
   packageManagers
   archivers
   mediaTools
-  productivity
+  #productivity
 }
 
 function everything(){
@@ -78,10 +76,10 @@ function menuDisplay(){
   Linux Setup:
   This setup is aimed at installing Arch components.
   You can choose from any options of below.
-  1. Coding Tools (VS-Code, Terminals) 
+  1. Coding Tools (VS-Code, Terminals)
   2. Media Tools (Media Codecs, Photo Editors, Video Editors)
   3. Productivity Tools (Planner, Joplin Note Taker)
-  4. CLI-Tools (Btop, youtube_dl, homebrew, github-cli, glow)
+  4. CLI-Tools (Btop, youtube_dl, github-cli, glow)
   5. Package Managers (Snap, Paru, Yay, Flatpak)
   6. Archivers (p7zip, unrar, tar, rsync)
   7. Coding Suite (Coding Tools and CLI-Tools, Package Managers)
@@ -99,7 +97,7 @@ function mainMenu() {
 
     read answer
        case $answer in
-     1) terminals ; mainMenu ;; 
+     1) terminals ; mainMenu ;;
      2) mediaTools ; mainMenu ;;
      3) productivity ; mainMenu ;;
      4) cliTools ; mainMenu ;;

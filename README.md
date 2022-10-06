@@ -13,8 +13,8 @@ The scripts can run on Arch based systems or systems that can use pacman or pama
 Am not an expert am also learning, feel free to give some pointers.
 
 ## ToDo List
-- [ ] Plans to support other systems like Arch 
-- [ ] Optimize script and remove bugs 
+- [x] Plans to support other systems like Arch
+- [ ] Optimize script and remove bugs
 - [x] Allow power users to use cli without using interactive shell?
 - [x] Add peazip file compressor to general tools, or alternatives like unrar.
 - [ ] Refactor to make it robust or efficient.

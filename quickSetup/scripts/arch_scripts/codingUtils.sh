@@ -3,23 +3,27 @@ function terminals(){
     sudo pacman -S kitty alacritty --noconfirm
 }
 
-function homeBrew(){
-  #Grab brew first then install other components
-
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Configure git profile
+function configGit(){
+    git config --global user.email "rileyhawk249@gmail.com"
+    git config --global user.name "Sean Riley Hawkins"
 }
+
 
 # Git CLI tools
 function githubCLI(){
+    configGit
     paru -S github-cli heroku-cli --noconfirm
 }
 
 # Glow MarkDown Reader
-# fd is a fuzzy file finder, bat is similar to less but with syntax highlighting.
+# fd is a fuzzy file finder
+# bat is similar to less but with syntax highlighting.
 # Glow is a markdown reader.
-# tldr is for "Too Long Didnt Read"
+# tealdeer is for "Too Long Didnt Read"
+
 function cliDocs(){
-    paru -S glow bat fd tldr --noconfirm
+    paru -S glow bat fd tealdeer --noconfirm
 }
 
 function launchers(){
@@ -33,7 +37,7 @@ function btopMonitor(){
 
 # youtube_dl fork namely YT-DLP
 function yt_DLP(){
-    python3 -m pip install -U yt-dlp
+    python3 -m pip install -U yt-dlp --noconfirm
 }
 
 # Install text editors
@@ -82,20 +86,20 @@ function getSdks(){
 }
 
 function getHerokuCli(){
-    paru -S npm heroku-cli
+    paru -S npm heroku-cli --noconfirm
 }
 
 function getCli(){
-    paru -S thefuck httpie cmus neofetch exa ncdu ripgrep ranger
+    paru -S thefuck httpie cmus neofetch exa ncdu ripgrep ranger --noconfirm
 }
 
 function getPHP(){
-    paru -S php php-pgsql php81-pdo
+    paru -S php php-pgsql php81-pdo --noconfirm
 }
 
 function getZSH(){
     # Get default zsh bin
-    paru -S zsh
+    paru -S zsh --noconfirm
 
     # Get Oh-my-zsh using curl
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -110,13 +114,13 @@ function getZSH(){
 
 # Setup docker and respective containers
 function setupDocker(){
-    paru -S docker containerd docker-compose --noconfirm
+    paru -S docker containerd docker-compose --noconfirm --nosudoloop
 
     # Start docker services.
     sudo systemctl start docker.service
 
     # Auto start docker services on boot
-    sudo systemctl enable docker.service
+    #sudo systemctl enable docker.service
 
     # Add docker to root user
     sudo usermod -aG docker $USER
@@ -127,7 +131,7 @@ function setupDocker(){
 function setupVBox(){
     mhwd-kernel -li | grep  "(linux"
     # Somehow its supposed to get the kernel version from the text o_o
-    paru -S virtualbox linux515-virtualbox-host-modules
+    paru -S virtualbox linux515-virtualbox-host-modules --noconfirm
     sudo vboxreload
     sudo modprobe vboxdrv
 }
@@ -142,7 +146,7 @@ function rustSetup(){
 
 # Setup AppFlowy Dev
 function getDeps(){
-    paru -S curl base-devel sqlite openssl clang cmake ninja pkg-config gtk3 unzip
+    paru -S curl base-devel sqlite openssl clang cmake ninja pkg-config gtk3 unzip --noconfirm --nosudoloop
 }
 
 function setupFlutter(){
@@ -155,15 +159,4 @@ function setupFlutter(){
     flutter config --enable-linux-desktop
     flutter doctor
 
-}
-
-function buildSDK(){
-    cd AppFlowy/frontend
-    cargo install --force cargo-make duckscript_cli
-    cargo make flowy_dev
-}
-
-function buildAF(){
-    cargo make --profile development-linux86 flowy-sdk-dev
-    cargo make -p development-linux-x86 appflowy-linux-dev
 }
