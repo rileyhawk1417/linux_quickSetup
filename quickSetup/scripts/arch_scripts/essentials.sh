@@ -4,6 +4,10 @@ function archivers(){
     sudo pacman -S p7zip p7zip-plugins unrar tar rsync --noconfirm
 }
 
+function getTools(){
+    paru -S cmake ninja meson clang --noconfirm
+}
+
 # Install media codecs
 function codecs(){
     sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins --noconfirm
@@ -15,6 +19,7 @@ function browser(){
 }
 
 function helper(){
+    #TODO: Check if yay is installed then remove it
     # Download helper in download folder and delete after
 
     # Install paru helper
@@ -28,6 +33,7 @@ function helper(){
     rmdir helpers
 }
 
+#FIXME: This should be for manjaro
 function enableAur(){
     # Enable aur
     sudo sed --in-place "s/#EnableAUR/EnableAUR/" "/etc/pamac.conf"
@@ -62,10 +68,19 @@ function stores(){
 
     snap --version
     flatpak --version
-    yay --version
     paru --version
 
   }
+
+  function storeSetup(){
+      sudo paru -S flatpak --noconfirm
+  }
+
+# Disk Tools
+function driveTools(){
+    sudo paru -S gnome-disk-utility gparted --noconfirm
+}
+
 
 # Add function to decide productivity
 
@@ -102,4 +117,15 @@ function productivity(){
 
 function onlineStorage(){
     paru -S internxt-drive-bin megasync  --noconfirm
+}
+
+# Have a function to pull everything together
+
+function essentials(){
+    archivers
+    codecs
+    helper
+    browser
+    stores
+    onlineStorage
 }

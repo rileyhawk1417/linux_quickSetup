@@ -12,8 +12,7 @@ function configGit(){
 
 # Git CLI tools
 function githubCLI(){
-    configGit
-    paru -S github-cli heroku-cli --noconfirm
+    paru -S npm github-cli heroku-cli --noconfirm
 }
 
 # Glow MarkDown Reader
@@ -33,6 +32,11 @@ function launchers(){
 # Btop Sys Monitor
 function btopMonitor(){
     paru -S btop --noconfirm
+}
+
+# System Monitoring Center
+function sysCenter(){
+    sudo pip install system-monitoring-center
 }
 
 # youtube_dl fork namely YT-DLP
@@ -83,10 +87,7 @@ function getSdks(){
     sdk install gradle 7.4.2
     sdk install kotlin 1.6.21
     sdk install java 18.0.1.fx-zulu
-}
-
-function getHerokuCli(){
-    paru -S npm heroku-cli --noconfirm
+    paru -S python3 --noconfirm
 }
 
 function getCli(){
@@ -143,6 +144,27 @@ function rustSetup(){
     rustup toolchain install stable
     rustup default stable
 }
+
+# A helper to pull everything
+
+function codingUtils(){
+    terminals
+    configGit
+    githubCLI
+    btopMonitor
+    yt_DLP
+    editors
+    ftpClient
+    VM_Utils
+    sdkMan
+    getSdks
+    getCli
+    getZSH
+    setupDocker
+    setupVBox
+    rustSetup
+}
+
 
 # Setup AppFlowy Dev
 function getDeps(){
