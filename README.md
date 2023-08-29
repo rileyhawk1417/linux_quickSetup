@@ -19,6 +19,13 @@ Am not an expert am also learning, feel free to give some pointers.
 - [x] Add peazip file compressor to general tools, or alternatives like unrar.
 - [ ] Refactor to make it robust or efficient.
 
+
+## Using the hotspot tool
+
+```shell
+sudo create_ap Markus WatchDogs
+```
+
 ## Link 🌍
 When learning bash or shellscript, I recommend the following links. They are not fuly detailed but at least cheatsheets can give a rough idea of what to do
 

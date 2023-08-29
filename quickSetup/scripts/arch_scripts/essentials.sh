@@ -1,131 +1,108 @@
-
-# Install archovers
-function archivers(){
-    sudo pacman -S p7zip p7zip-plugins unrar tar rsync --noconfirm
+#!/usr/bin/env bash
+# Install archivers
+archivers() {
+	sudo pacman -S p7zip p7zip-plugins unrar tar rsync --noconfirm
 }
 
-function getTools(){
-    paru -S cmake ninja meson clang --noconfirm
+getBuildTools() {
+	paru -S cmake ninja meson clang curl base-devel sqlite \
+    openssl clang cmake ninja pkg-config gtk3 \
+    unzip --noconfirm --nosudoloop
 }
 
 # Install media codecs
-function codecs(){
-    sudo pacman -S a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins --noconfirm
+codecs() {
+	sudo pacman -S a52dec faac faad2 flac jasper lame libdca \
+    libdv libmad libmpeg2 libtheora libvorbis libxv wavpack \
+    x264 xvidcore gstreamer0.10-plugins --noconfirm
 }
 
 # Install browser's and download manager
-function browser(){
-    paru -S brave-bin opera freedownloadmanager --noconfirm
+browser() {
+	paru -S brave-bin opera firefox min freedownloadmanager --noconfirm
 }
 
-function helper(){
-    #TODO: Check if yay is installed then remove it
-    # Download helper in download folder and delete after
+helper() {
+	#TODO: Check if yay is installed then remove it(my preference really)
+	# Download helper in download folder and delete after
 
-    # Install paru helper
+	# Install paru helper
+  # TODO: Fetch paru from AUR
 
-    sudo pacman -S --needed base-devel --noconfirm
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
-    makepkg -si
+  sudo pacman -S curl wget --noconfirm
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  sudo pacman -S rust
+	sudo pacman -S --needed base-devel --noconfirm
+	git clone https://aur.archlinux.org/paru.git
+	cd paru || echo "No Directory found"
+	makepkg -si
 
-    cd ../
-    rmdir helpers
+	cd ../
+	rmdir helpers
 }
 
-#FIXME: This should be for manjaro
-function enableAur(){
-    # Enable aur
-    sudo sed --in-place "s/#EnableAUR/EnableAUR/" "/etc/pamac.conf"
-    #Check AUR updates
-    sudo sed --in-place "s/#CheckAURUpdates/CheckAURUpdates/" "/etc/pamac.conf"
-}
+stores() {
+	enableAur
 
-function enableSnap(){
-    # Install snap
-    paru install snapd libpamac-snap-plugin --noconfirm
+	# Install aur helpers both yay and paru
+	helper
+	# Install flatpak
+	sudo paru install flatpak libpamac-flatpak-plugin --noconfirm
 
-    # Start snap services
-    sudo systemctl enable --now snapd.socket
+	# Test Installation
 
-    # Enable support for classic snaps
-    ln -s /var/lib/snapd/snap /snap
+	flatpak --version
+	paru --version
 
 }
 
-function stores(){
-    enableAur
-
-    # Install aur helpers both yay and paru
-    helper
-    # Install flatpak
-    sudo pamac install flatpak libpamac-flatpak-plugin --noconfirm
-
-    # Install Snap
-    enableSnap
-
-    # Test Installation
-
-    snap --version
-    flatpak --version
-    paru --version
-
-  }
-
-  function storeSetup(){
-      sudo paru -S flatpak --noconfirm
-  }
+storeSetup() {
+	sudo paru -S flatpak --noconfirm
+}
 
 # Disk Tools
-function driveTools(){
-    sudo paru -S gnome-disk-utility gparted --noconfirm
+driveTools() {
+	sudo paru -S gnome-disk-utility gparted --noconfirm
 }
 
+# Write to .xinitrc
+writeKeyring() {
+	echo "
+    source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
-# Add function to decide productivity
 
-function noteChoice(){
-  while [[ "$1" =~ ^-&& ! "$" == "--" ]]; do case $1 in
-    -p | --planner )
-        flatpak install flathub.com.alainm23.planner
-        flatpak run com.github.alainm23.planner
-        ;;
-    -j | --joplin )
-        paru -S install joplin-desktop-bin --noconfirm
-        ;;
-    * )
-        echo "Undefined"
-        ;;
-      esac; shift; done
-      if [[ "$1" == '--' ]]; then shift;
-      else
-        echo "Script Broken"
-      fi
+    eval $(/usr/bin/gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
 
+    mkdir -p "$HOME"/.local/share/keyrings
+" >>~/.xinitrc
 }
 
-function productivity(){
-  # Install Planner
-  flatpak install flathub com.github.alainm23.planner
-
-  # Run planner to test install
-  flatpak run com.github.alainm23.planner
-
-  # Install joplin
-  paru -S joplin-desktop-bin --noconfirm
+# Install keyring helpers
+keyRings() {
+	sudo paru -S gnome-keyring libsecret libgnome-keyring
 }
 
-function onlineStorage(){
-    paru -S internxt-drive-bin megasync  --noconfirm
+hotspotTools() {
+	paru -S create_ap haveged
 }
 
-# Have a function to pull everything together
+gamingTools(){
+  paru -S wine lutris
+}
 
-function essentials(){
-    archivers
-    codecs
-    helper
-    browser
-    stores
-    onlineStorage
+# Have a  to pull everything together
+
+essentials() {
+	archivers
+	codecs
+	#TODO: helper
+  storeSetup
+  driveTools
+  keyRings
+	browser
+	hotspotTools
+  gamingTools
+  driveTools
+  getBuildTools
 }

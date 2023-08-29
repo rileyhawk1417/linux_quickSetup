@@ -1,29 +1,24 @@
+#!/usr/bin/env bash
 # This script is to automate install as much as possible
 # TODO: Connect the other scripts
 
 source "scripts/arch_scripts/codingUtils.sh"
 source "scripts/arch_scripts/essentials.sh"
 source "scripts/arch_scripts/mediaUtils.sh"
+source "scripts/arch_scripts/wm.sh"
 
 function codingTools(){
-  terminals
   #TODO: Test if sys is 64 bit before installing homeBrew
-  githubCLI
-  glowMD
-  btopMonitor
-  yt_DLP
-  VM_Utils
+  #NOTE: Only the essential coding tools
+  configGit
+  terminals
+  editors
+  getZSH
 }
 
 function essentials(){
   archivers
   codecs
-  helpers
-  enableAur
-  enableSnap
-  stores
-  #productivity
-  #wpsOffice
   #TODO: Fix install for onlyoffice
 }
 
@@ -40,16 +35,12 @@ function mediaTools(){
 function cliTools(){
   btopMonitor
   yt_DLP
-  #homeBrew
   githubCLI
-  glowMD
+  cliDocs
 }
 
 function packageManagers(){
-  enableSnap
-  enableAur
-  helpers
-  stores
+  #TODO: add pnpm, asdf
 }
 
 function codingSuite(){
@@ -62,13 +53,13 @@ function theBasics(){
   packageManagers
   archivers
   mediaTools
-  #productivity
 }
 
 function everything(){
   codingTools
   essentials
   mediaUtils
+  hyprLandSetup
 }
 
 function menuDisplay(){
@@ -76,11 +67,11 @@ function menuDisplay(){
   Linux Setup:
   This setup is aimed at installing Arch components.
   You can choose from any options of below.
-  1. Coding Tools (VS-Code, Terminals)
+  1. Coding Tools (Editors, Terminals, CLI tools)
   2. Media Tools (Media Codecs, Photo Editors, Video Editors)
-  3. Productivity Tools (Planner, Joplin Note Taker)
+  3. Productivity Tools
   4. CLI-Tools (Btop, youtube_dl, github-cli, glow)
-  5. Package Managers (Snap, Paru, Yay, Flatpak)
+  5. Package Managers (Snap, Paru, Flatpak)
   6. Archivers (p7zip, unrar, tar, rsync)
   7. Coding Suite (Coding Tools and CLI-Tools, Package Managers)
   8. Basics (Package Managers, Archivers, Media Tools, Productivity)
