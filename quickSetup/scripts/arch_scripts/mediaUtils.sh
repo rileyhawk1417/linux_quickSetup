@@ -1,14 +1,16 @@
-function videoEditors(){
-    sudo pacman -S obs-studio shotcut vlc --noconfirm
+function videoEditors() {
+    paru -S obs-studio shotcut kdenlive vlc --noconfirm
 }
 
-function photosEditors(){
-    sudo pacman -S flameshot darktable gimp inkscape krita --noconfirm
+function photosEditors() {
+    paru -S flameshot darktable gimp inkscape krita --noconfirm
 }
 
-installMediaSuite(){
-  videoEditors
-  photosEditors
+function audioEditors() {
+    paru -S ocenaudio ardour --noconfirm
 }
 
-
+installMediaSuite() {
+    videoEditors
+    photosEditors
+}

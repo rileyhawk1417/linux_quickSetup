@@ -21,9 +21,9 @@ function editModprobe() {
 
 	sudo touch /etc/modprobe.d/radeon.conf
 
-	echo "options amdgpu si_support=1 \noptions amdgpu cik_support=1" >>/etc/modprobe.d/amdgpu.conf
+	echo "options amdgpu si_support=1 \noptions amdgpu cik_support=0" >>/etc/modprobe.d/amdgpu.conf
 
-	echo "options radeon si_support=1 \noptions radeon cik_support=1" >>/etc/modprobe.d/radeon.conf
+	echo "options radeon si_support=0 \noptions radeon cik_support=0" >>/etc/modprobe.d/radeon.conf
 
 	# Generate intrafms
 	mkinitcpio -p linux515 # Linux510 is for the default kernel
